@@ -1,0 +1,77 @@
+﻿@model IEnumerable<DaleelElkheir.DAL.Domain.CSRActivity>
+
+@{
+    ViewBag.Title = "CSRActivityList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>CSR Activities</h2>
+<br/>
+<p>
+    @Html.ActionLink("Create New", "CreateCSRActivity", null,new {@class="btn btn-primary"})
+</p>
+<table class="table-striped table-hover table-condensed table-bordered table" id="CSRActivityTable">
+    <thead>
+        <tr>
+
+            <th>
+                @Html.DisplayName("Title En")
+            </th>
+            <th>
+                @Html.DisplayName("Title Ar")
+            </th>
+            <th>
+                @Html.DisplayName("Date")
+            </th>
+            <th>
+                @Html.DisplayName("CSR")
+            </th>
+            <th>
+                @Html.DisplayName("Description En")
+            </th>
+            <th>
+                @Html.DisplayName("Description Ar")
+            </th>
+          
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+               
+                <td>
+                    @Html.DisplayFor(modelItem => item.TitleEn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TitleAr)
+                </td>
+                <td>
+                    @Html.DisplayName(item.ActivityDate.Value.ToShortDateString())
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CompanySocialResponsibility.NameEn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DescriptionEn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DescriptionAr)
+                </td>
+               
+                <td>
+                    @Html.ActionLink("Edit", "UpdateCSRActivity", new { CSRActivityID = item.ID }) |
+                    @Html.ActionLink("Delete", "DeleteCSRActivity", new { CSRActivityID = item.ID })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section Scripts {
+    <script>
+$(document).ready(function() {
+    $('#CSRActivityTable').DataTable();
+});
+    </script>
+}

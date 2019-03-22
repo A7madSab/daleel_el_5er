@@ -1,0 +1,100 @@
+﻿@model IEnumerable<DaleelElkheir.DAL.Domain.BloodBank>
+
+@{
+    ViewBag.Title = "BloodBankList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Blood Banks</h2>
+<br/>
+<p>
+    @Html.ActionLink("Create New", "CreateBloodBank", null,new {@class="btn btn-primary"})
+</p>
+<table class="table-striped table-hover table-condensed table-bordered table" id="BloodBankTable">
+    <thead>
+        <tr>
+
+            <th>
+                @Html.DisplayName("Name EN")
+            </th>
+            <th>
+                @Html.DisplayName("Name AR")
+            </th>
+            <th>
+                @Html.DisplayName("Title En")
+            </th>
+            <th>
+                @Html.DisplayName("Title Ar")
+            </th>
+            <th>
+                @Html.DisplayName("Region")
+            </th>
+            <th>
+                @Html.DisplayName("Description En")
+            </th>
+            <th>
+                @Html.DisplayName("Description Ar")
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NameEn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NameAr)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TitleEn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TitleAr)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.City.NameEn) , @Html.DisplayFor(modelItem => item.City.Governorate.NameEn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DescriptionEn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DescriptionAr)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "UpdateBloodBank", new { bankID = item.ID }) |
+                    @*@Html.ActionLink("Delete", "DeleteBloodBank", new { bankID = item.ID })*@
+                    <input type="button" id="del" name="delete" class="btn-link" style="padding:0px;" value="delete" onclick="deleteRecord(@item.ID)" />
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section Scripts {
+    <script>
+$(document).ready(function() {
+    $('#BloodBankTable').DataTable();
+});
+
+function deleteRecord(ID)
+{
+    debugger;
+    $.getJSON("@Url.Action("DeleteBloodBank", "BloodBank")", { bankID: ID }, function (data) {
+    if(data.result == false)
+    {
+        alert(data.message);
+    }
+    else
+    {
+        alert(data.message);
+        window.location.href = '@Url.Action("BloodBankList", "BloodBank")'
+    }
+
+});
+}
+</script>
+
+
+}

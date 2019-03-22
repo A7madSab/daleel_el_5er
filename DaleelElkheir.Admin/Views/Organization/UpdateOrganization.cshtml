@@ -1,0 +1,244 @@
+﻿@model DaleelElkheir.Admin.Models.Organizations.OrganizationModel
+
+@{
+    ViewBag.Title = "UpdateOrganization";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@using (Html.BeginForm("UpdateOrganization", "Organization", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h5>Update Organization</h5>
+        </div>
+        <div class="panel-body">
+
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="row form-group  ">
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.NameEn, "Name English", htmlAttributes: new { @class = "control-label col-md-4", @Style = "text-align: left !important;" })
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.NameEn, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.NameEn, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.NameAr, "Name Arabic", htmlAttributes: new { @class = "control-label col-md-4", @Style = "text-align: left !important;" })
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.NameAr, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.NameAr, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row form-group  ">
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.AddressEn, "Address English", htmlAttributes: new { @class = "control-label col-md-4", @Style = "text-align: left !important;" })
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.AddressEn, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.AddressEn, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.AddressAr, "Address Arabic", htmlAttributes: new { @class = "control-label col-md-4", @Style = "text-align: left !important;" })
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.AddressAr, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.AddressAr, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.GovernorateID, "Governorate", htmlAttributes: new { @class = "control-label col-md-4", @Style = "text-align: left !important;" })
+                        <div class="col-md-8">
+                            @Html.DropDownList("GovernorateID", new SelectList(ViewBag.Governorate, "Value", "Text"), null, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.GovernorateID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.CityID, "Region", htmlAttributes: new { @class = "control-label col-md-4", @Style = "text-align: left !important;" })
+                        <div class="col-md-8">
+                            @Html.DropDownList("CityID", new SelectList(ViewBag.region, "Value", "Text"), null, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.CityID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row form-group">
+
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.AreaID, "Area", htmlAttributes: new { @class = "control-label col-md-4", @Style = "text-align: left !important;" })
+                        <div class="col-md-8">
+                            @Html.DropDownList("AreaID", new SelectList(ViewBag.area, "Value", "Text"), null, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.AreaID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.CategoryList, "Category", htmlAttributes: new { @class = "control-label col-md-4", @Style = "text-align: left !important;" })
+                        <div class="col-md-8">
+                            @Html.DropDownList("CategoryList", new SelectList(ViewBag.Category, "Value", "Text"), null, new { @multiple = "multiple" })
+                            @Html.ValidationMessageFor(model => model.CategoryList, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row form-group">
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.LogoFileID, "Image", htmlAttributes: new { @class = "control-label col-md-4", @Style = "text-align: left !important;" })
+                        <div class="col-md-8">
+                            <div>  <img id="org_img" height="100" src="@(Model.FileData!=null?Model.FileData.Extenstion:null)" width="90" class="img-thumbnail" /> </div>
+                            <div> <input type="file" title="search image" id="file" name="file" onchange="show(this)" accept="image/*" /> </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.Latitude, "Latitude", htmlAttributes: new { @class = "control-label col-md-4", @Style = "text-align: left !important;" })
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.Latitude, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Latitude, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.Longitude, "Longitude", htmlAttributes: new { @class = "control-label col-md-4", @Style = "text-align: left !important;" })
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.Longitude, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Longitude, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    @Html.LabelFor(model => model.DescriptionProgram, "Program Description:", htmlAttributes: new { @class = "control-label col-md-4", @Style = "text-align: left !important;" })
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-12">
+                        @Html.TextAreaFor(model => model.DescriptionProgram, 2, 40, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.DescriptionProgram, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="row">
+                    @Html.LabelFor(model => model.HowToDonate, "How To Donate:", htmlAttributes: new { @class = "control-label col-md-4", @Style = "text-align: left !important;" })
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-12">
+                        @Html.TextAreaFor(model => model.HowToDonate, 2, 40, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.HowToDonate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="row">
+                    @Html.LabelFor(model => model.DescriptionEn, "Description English", htmlAttributes: new { @class = "control-label col-md-4", @Style = "text-align: left !important;" })
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-12">
+                        @Html.TextAreaFor(model => model.DescriptionEn, 2, 40, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.DescriptionEn, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="row">
+                    @Html.LabelFor(model => model.DescriptionAr, "Description Arabic", htmlAttributes: new { @class = "control-label col-md-4", @Style = "text-align: left !important;" })
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-12">
+                        @Html.TextAreaFor(model => model.DescriptionAr, 2, 40, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.DescriptionAr, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            </div>
+            </div>
+    <div class="row">
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" name="save" value="Save" class="btn btn-primary btn-group-lg" style="min-width:100px;" />
+                @Html.ActionLink("Cancel", "OrganizationList", null, htmlAttributes: new { @class = "btn btn-primary" })
+            </div>
+        </div>
+    </div>
+    @Html.HiddenFor(m=>m.ID)
+    @Html.HiddenFor(m => m.LogoFileID)
+}
+ 
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+<script src="~/ckeditor_4.8.0_full/ckeditor/ckeditor.js"></script>
+  <script>
+    CKEDITOR.replace("DescriptionEn");
+    CKEDITOR.replace("DescriptionAr");
+    CKEDITOR.replace("DescriptionProgram");
+    CKEDITOR.replace("HowToDonate");
+</script>
+<script type="text/javascript">
+
+    $(function () {
+        $("#GovernorateID").change(function () {
+            debugger;
+            var val = $(this).val();
+            var subItems = "";
+            $.getJSON("@Url.Action("GetRegions","BloodBank")", { GovernorateID: val }, function (data) {
+              $.each(data,function(index,item){
+                subItems+="<option value='"+item.Value+"'>"+item.Text+"</option>"
+              });
+              $("#CityID").html(subItems)
+            });
+        });
+
+        $("#CityID").change(function () {
+            debugger;
+            var val = $(this).val();
+            var subItems="";
+            $.getJSON("@Url.Action("GetAreas", "BloodBank")", { CityID: val }, function (data) {
+              $.each(data,function(index,item){
+                subItems+="<option value='"+item.Value+"'>"+item.Text+"</option>"
+              });
+              $("#AreaID").html(subItems)
+            });
+        });
+    });
+
+</script> 
+<script>
+    function show(input) {
+        if (input.files && input.files[0]) {
+            var filerdr = new FileReader();
+            filerdr.onload = function (e) {
+                $('#org_img').attr('src', e.target.result);
+            }
+            filerdr.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
+
+<script src="~/bootstrap-multiselect/jquery.min.js"></script>
+<link href="~/bootstrap-multiselect/bootstrap-multiselect.css" rel="stylesheet" />
+<script src="~/bootstrap-multiselect/bootstrap-multiselect.js"></script>
+<script>
+    var j = jQuery.noConflict();
+    j(function () {
+        debugger;
+        j('#CategoryList').multiselect({
+
+            includeSelectAllOption: true,
+            enableFiltering: true,
+            buttonWidth: '285'
+        });
+    });
+
+    var data =@Html.Raw(Json.Encode(@Model.CategoryList));
+    $("#CategoryList").val(data);
+</script>
+
+}

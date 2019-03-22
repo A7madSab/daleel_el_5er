@@ -1,0 +1,53 @@
+﻿@model IEnumerable<DaleelElkheir.DAL.Domain.EventGallery>
+
+@{
+    ViewBag.Title = "EventGalleryList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+       <h2>Event Gallery</h2> 
+        <br />
+        <p>
+            @Html.ActionLink("Create New", "CreateEventGallery", null,new {@class= "btn btn-primary" })
+        </p>
+        <table class="table-striped table-hover table-condensed table-bordered table" id="EventGalleryTable">
+            <thead>
+                <tr>
+
+                    <th>
+                        @Html.DisplayName("Event")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Image")
+                    </th>
+                  
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+            {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Event.TitleEn)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                      
+                        <td>
+                            @Html.ActionLink("Edit", "UpdateEventGallery", new { GalleryID = item.ID }) |
+                            @Html.ActionLink("Delete", "DeleteEventGallery", new { GalleryID = item.ID })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+@section Scripts {
+    <script>
+$(document).ready(function() {
+    $('#EventGalleryTable').DataTable();
+});
+    </script>
+}

@@ -1,0 +1,316 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{53172CF8-EFFA-43DD-9C8B-F999CFFCEA28}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DaleelElkheir.DAL</RootNamespace>
+    <AssemblyName>DaleelElkheir.DAL</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Domain\About.cs" />
+    <Compile Include="Domain\Activity.cs" />
+    <Compile Include="Domain\Area.cs" />
+    <Compile Include="Domain\CharityType.cs" />
+    <Compile Include="Domain\CompanyCategory.cs" />
+    <Compile Include="Domain\Donation.cs" />
+    <Compile Include="Domain\Guide.cs" />
+    <Compile Include="Domain\Hospital.cs" />
+    <Compile Include="Domain\BloodBank.cs" />
+    <Compile Include="Domain\HospitalContact.cs" />
+    <Compile Include="Domain\BloodBankContact.cs" />
+    <Compile Include="Domain\CaseConfirmation.cs" />
+    <Compile Include="Domain\CaseStatu.cs" />
+    <Compile Include="Domain\CaseType.cs" />
+    <Compile Include="Domain\Category.cs" />
+    <Compile Include="Domain\ChatThread.cs" />
+    <Compile Include="Domain\ChatThreadMessage.cs" />
+    <Compile Include="Domain\City.cs" />
+    <Compile Include="Domain\CompanySocialResponsibility.cs" />
+    <Compile Include="Domain\CSRActivity.cs" />
+    <Compile Include="Domain\DaleelElkheirModel.cs" />
+    <Compile Include="Domain\DeviceToken.cs" />
+    <Compile Include="Domain\Event.cs" />
+    <Compile Include="Domain\EventForActivity.cs" />
+    <Compile Include="Domain\EventGallery.cs" />
+    <Compile Include="Domain\FileData.cs" />
+    <Compile Include="Domain\Governorate.cs" />
+    <Compile Include="Domain\HelpCase.cs" />
+    <Compile Include="Domain\Information.cs" />
+    <Compile Include="Domain\JobOffer.cs" />
+    <Compile Include="Domain\KeyWord.cs" />
+    <Compile Include="Domain\Notification.cs" />
+    <Compile Include="Domain\NotificationType.cs" />
+    <Compile Include="Domain\Organization.cs" />
+    <Compile Include="Domain\OrganizationCategory.cs" />
+    <Compile Include="Domain\OurProgram.cs" />
+    <Compile Include="Domain\OurStory.cs" />
+    <Compile Include="Domain\Product.cs" />
+    <Compile Include="Domain\ProductCategory.cs" />
+    <Compile Include="Domain\Program.cs" />
+    <Compile Include="Domain\SeasonalProject.cs" />
+    <Compile Include="Domain\Seller.cs" />
+    <Compile Include="Domain\Sponsor.cs" />
+    <Compile Include="Domain\TrusteesBoard.cs" />
+    <Compile Include="Domain\User.cs" />
+    <Compile Include="Domain\UserCase.cs" />
+    <Compile Include="Domain\UserCategory.cs" />
+    <Compile Include="Domain\UserDevice.cs" />
+    <Compile Include="Domain\UserOrg.cs" />
+    <Compile Include="Domain\UserType.cs" />
+    <Compile Include="Domain\volunteer.cs" />
+    <Compile Include="Domain\VolunteerCategory.cs" />
+    <Compile Include="Migrations\201902242201099_Initial.cs" />
+    <Compile Include="Migrations\201902242201099_Initial.Designer.cs">
+      <DependentUpon>201902242201099_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902242207054_addWhoAreTable.cs" />
+    <Compile Include="Migrations\201902242207054_addWhoAreTable.Designer.cs">
+      <DependentUpon>201902242207054_addWhoAreTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902251235188_addOurStoryTable.cs" />
+    <Compile Include="Migrations\201902251235188_addOurStoryTable.Designer.cs">
+      <DependentUpon>201902251235188_addOurStoryTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902251239501_RemoveWhoArestable.cs" />
+    <Compile Include="Migrations\201902251239501_RemoveWhoArestable.Designer.cs">
+      <DependentUpon>201902251239501_RemoveWhoArestable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903051314107_EventGallaryEventIDNullabl.cs" />
+    <Compile Include="Migrations\201903051314107_EventGallaryEventIDNullabl.Designer.cs">
+      <DependentUpon>201903051314107_EventGallaryEventIDNullabl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903051336559_EventGallaryDropEventGallery.cs" />
+    <Compile Include="Migrations\201903051336559_EventGallaryDropEventGallery.Designer.cs">
+      <DependentUpon>201903051336559_EventGallaryDropEventGallery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903051423546_addJobOffertable.cs" />
+    <Compile Include="Migrations\201903051423546_addJobOffertable.Designer.cs">
+      <DependentUpon>201903051423546_addJobOffertable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903111811193_addProgramDescriptionOrganizationTbl.cs" />
+    <Compile Include="Migrations\201903111811193_addProgramDescriptionOrganizationTbl.Designer.cs">
+      <DependentUpon>201903111811193_addProgramDescriptionOrganizationTbl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903111821411_addProgramDescriptionOrganizationTbl1.cs" />
+    <Compile Include="Migrations\201903111821411_addProgramDescriptionOrganizationTbl1.Designer.cs">
+      <DependentUpon>201903111821411_addProgramDescriptionOrganizationTbl1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903111951116_AddHowToDonateOrganizationTbl.cs" />
+    <Compile Include="Migrations\201903111951116_AddHowToDonateOrganizationTbl.Designer.cs">
+      <DependentUpon>201903111951116_AddHowToDonateOrganizationTbl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903121216357_addPogramDescHelpCaseTbl.cs" />
+    <Compile Include="Migrations\201903121216357_addPogramDescHelpCaseTbl.Designer.cs">
+      <DependentUpon>201903121216357_addPogramDescHelpCaseTbl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903121239063_addCharityTypeTbl.cs" />
+    <Compile Include="Migrations\201903121239063_addCharityTypeTbl.Designer.cs">
+      <DependentUpon>201903121239063_addCharityTypeTbl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903130819500_AddDonationTable.cs" />
+    <Compile Include="Migrations\201903130819500_AddDonationTable.Designer.cs">
+      <DependentUpon>201903130819500_AddDonationTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903130837414_AddCategorycol.cs" />
+    <Compile Include="Migrations\201903130837414_AddCategorycol.Designer.cs">
+      <DependentUpon>201903130837414_AddCategorycol.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903131539035_AddHowToJoinInEvents.cs" />
+    <Compile Include="Migrations\201903131539035_AddHowToJoinInEvents.Designer.cs">
+      <DependentUpon>201903131539035_AddHowToJoinInEvents.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903151327518_AddEventProgamDesc.cs" />
+    <Compile Include="Migrations\201903151327518_AddEventProgamDesc.Designer.cs">
+      <DependentUpon>201903151327518_AddEventProgamDesc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903151824017_AddGuidtblKeywordtbl.cs" />
+    <Compile Include="Migrations\201903151824017_AddGuidtblKeywordtbl.Designer.cs">
+      <DependentUpon>201903151824017_AddGuidtblKeywordtbl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903152041356_AddGuideNamecol.cs" />
+    <Compile Include="Migrations\201903152041356_AddGuideNamecol.Designer.cs">
+      <DependentUpon>201903152041356_AddGuideNamecol.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903152141558_AddFileIDGuidetbl.cs" />
+    <Compile Include="Migrations\201903152141558_AddFileIDGuidetbl.Designer.cs">
+      <DependentUpon>201903152141558_AddFileIDGuidetbl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903152155325_UpdateGuideCols.cs" />
+    <Compile Include="Migrations\201903152155325_UpdateGuideCols.Designer.cs">
+      <DependentUpon>201903152155325_UpdateGuideCols.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903162200029_FileNameColDuide.cs" />
+    <Compile Include="Migrations\201903162200029_FileNameColDuide.Designer.cs">
+      <DependentUpon>201903162200029_FileNameColDuide.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903162213401_ExtColGuideTabl.cs" />
+    <Compile Include="Migrations\201903162213401_ExtColGuideTabl.Designer.cs">
+      <DependentUpon>201903162213401_ExtColGuideTabl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903170107235_RemoveFileIDDuideCol.cs" />
+    <Compile Include="Migrations\201903170107235_RemoveFileIDDuideCol.Designer.cs">
+      <DependentUpon>201903170107235_RemoveFileIDDuideCol.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903170139544_addproductSellerTables.cs" />
+    <Compile Include="Migrations\201903170139544_addproductSellerTables.Designer.cs">
+      <DependentUpon>201903170139544_addproductSellerTables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903171413372_addProgramDescriptionProductcol.cs" />
+    <Compile Include="Migrations\201903171413372_addProgramDescriptionProductcol.Designer.cs">
+      <DependentUpon>201903171413372_addProgramDescriptionProductcol.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903171527515_produtcategorytbl.cs" />
+    <Compile Include="Migrations\201903171527515_produtcategorytbl.Designer.cs">
+      <DependentUpon>201903171527515_produtcategorytbl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903180218435_removeproductIDPCol.cs" />
+    <Compile Include="Migrations\201903180218435_removeproductIDPCol.Designer.cs">
+      <DependentUpon>201903180218435_removeproductIDPCol.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\GenericRepository.cs" />
+    <Compile Include="Repository\IGenericRepository.cs" />
+    <Compile Include="Repository\IUnitOfWork.cs" />
+    <Compile Include="Repository\UnitOfWork.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201902242201099_Initial.resx">
+      <DependentUpon>201902242201099_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902242207054_addWhoAreTable.resx">
+      <DependentUpon>201902242207054_addWhoAreTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902251235188_addOurStoryTable.resx">
+      <DependentUpon>201902251235188_addOurStoryTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902251239501_RemoveWhoArestable.resx">
+      <DependentUpon>201902251239501_RemoveWhoArestable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903051314107_EventGallaryEventIDNullabl.resx">
+      <DependentUpon>201903051314107_EventGallaryEventIDNullabl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903051336559_EventGallaryDropEventGallery.resx">
+      <DependentUpon>201903051336559_EventGallaryDropEventGallery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903051423546_addJobOffertable.resx">
+      <DependentUpon>201903051423546_addJobOffertable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903111811193_addProgramDescriptionOrganizationTbl.resx">
+      <DependentUpon>201903111811193_addProgramDescriptionOrganizationTbl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903111821411_addProgramDescriptionOrganizationTbl1.resx">
+      <DependentUpon>201903111821411_addProgramDescriptionOrganizationTbl1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903111951116_AddHowToDonateOrganizationTbl.resx">
+      <DependentUpon>201903111951116_AddHowToDonateOrganizationTbl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903121216357_addPogramDescHelpCaseTbl.resx">
+      <DependentUpon>201903121216357_addPogramDescHelpCaseTbl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903121239063_addCharityTypeTbl.resx">
+      <DependentUpon>201903121239063_addCharityTypeTbl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903130819500_AddDonationTable.resx">
+      <DependentUpon>201903130819500_AddDonationTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903130837414_AddCategorycol.resx">
+      <DependentUpon>201903130837414_AddCategorycol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903131539035_AddHowToJoinInEvents.resx">
+      <DependentUpon>201903131539035_AddHowToJoinInEvents.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903151327518_AddEventProgamDesc.resx">
+      <DependentUpon>201903151327518_AddEventProgamDesc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903151824017_AddGuidtblKeywordtbl.resx">
+      <DependentUpon>201903151824017_AddGuidtblKeywordtbl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903152041356_AddGuideNamecol.resx">
+      <DependentUpon>201903152041356_AddGuideNamecol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903152141558_AddFileIDGuidetbl.resx">
+      <DependentUpon>201903152141558_AddFileIDGuidetbl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903152155325_UpdateGuideCols.resx">
+      <DependentUpon>201903152155325_UpdateGuideCols.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903162200029_FileNameColDuide.resx">
+      <DependentUpon>201903162200029_FileNameColDuide.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903162213401_ExtColGuideTabl.resx">
+      <DependentUpon>201903162213401_ExtColGuideTabl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903170107235_RemoveFileIDDuideCol.resx">
+      <DependentUpon>201903170107235_RemoveFileIDDuideCol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903170139544_addproductSellerTables.resx">
+      <DependentUpon>201903170139544_addproductSellerTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903171413372_addProgramDescriptionProductcol.resx">
+      <DependentUpon>201903171413372_addProgramDescriptionProductcol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903171527515_produtcategorytbl.resx">
+      <DependentUpon>201903171527515_produtcategorytbl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903180218435_removeproductIDPCol.resx">
+      <DependentUpon>201903180218435_removeproductIDPCol.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

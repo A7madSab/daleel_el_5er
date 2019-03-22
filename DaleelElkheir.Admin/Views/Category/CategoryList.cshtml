@@ -1,0 +1,83 @@
+﻿@model IEnumerable<DaleelElkheir.DAL.Domain.Category>
+
+@{
+    ViewBag.Title = "CategoryList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Categories</h2>
+<br/>
+<p>
+    @Html.ActionLink("Create New", "CreateCategory", null,new {@class="btn btn-primary"})
+</p>
+<table class="table-striped table-hover table-condensed table-bordered table" id="CategoryTable">
+    <thead>
+        <tr>
+
+            <th>
+                @Html.DisplayName("Name En")
+            </th>
+            <th>
+                @Html.DisplayName("Name Ar")
+            </th>
+            <th>
+                @Html.DisplayName("Description En")
+            </th>
+            <th>
+                @Html.DisplayName("Description Ar")
+            </th>
+          
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+               
+                <td>
+                    @Html.DisplayFor(modelItem => item.NameEn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NameAr)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DescriptionEn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DescriptionAr)
+                </td>
+               
+                <td>
+                    @Html.ActionLink("Edit", "UpdateCategory", new { categoryID = item.ID }) |
+                    @*@Html.ActionLink("Delete", "DeleteCategory", new { categoryID = item.ID })*@
+                    <input type="button" id="del" name="delete" class="btn-link" style="padding:0px;" value="Delete" onclick="deleteRecord(@item.ID)" />
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section Scripts {
+    <script>
+$(document).ready(function() {
+    $('#CategoryTable').DataTable();
+});
+
+function deleteRecord(ID)
+{
+    debugger;
+    $.getJSON("@Url.Action("DeleteCategory", "Category")", { categoryID: ID }, function (data) {
+    if(data.result == false)
+    {
+        alert(data.message);
+    }
+    else
+    {
+        alert(data.message);
+        window.location.href = '@Url.Action("CategoryList", "Category")'
+    }
+
+});
+}
+ </script>
+}

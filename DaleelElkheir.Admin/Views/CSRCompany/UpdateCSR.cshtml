@@ -1,0 +1,99 @@
+﻿@model DaleelElkheir.Admin.Models.CSR.CSRCompanyModel
+
+@{
+    ViewBag.Title = "UpdateCSR";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@using (Html.BeginForm("UpdateCSR", "CSRCompany", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h5>Update Company Social Responsibility</h5>
+        </div>
+        <div class="panel-body">
+
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+                <div class="row form-group  ">
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.NameEn, "Name English", htmlAttributes: new { @class = "control-label col-md-4", @Style = "text-align: left !important;" })
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.NameEn, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.NameEn, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.Category, "Category", htmlAttributes: new { @class = "control-label col-md-4", @Style = "text-align: left !important;" })
+                        <div class="col-md-8">
+                            @Html.DropDownList("Category", new SelectList(ViewBag.CategoryList, "Value", "Text"), null, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Category, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row form-group">
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.NameAr, "Name Arabic", htmlAttributes: new { @class = "control-label col-md-4", @Style = "text-align: left !important;" })
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.NameAr, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.NameAr, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row form-group">
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.FileID, "Image", htmlAttributes: new { @class = "control-label col-md-4", @Style = "text-align: left !important;" })
+                        <div class="col-md-8">
+                            <div>  <img id="csr_img" height="100" src="@(Model.FileData!=null?Model.FileData.Extenstion:null)" width="90" class="img-thumbnail" /> </div>
+                            <div> <input type="file" title="search image" id="file" name="file" onchange="show(this)" accept="image/*" /> </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" name="save" value="Save" class="btn btn-primary btn-group-lg" style="min-width:100px;" />
+                @Html.ActionLink("Cancel", "CSRList", null, htmlAttributes: new { @class = "btn btn-primary" })
+            </div>
+        </div>
+    </div>
+    @Html.HiddenFor(m => m.ID)
+    @Html.HiddenFor(m => m.FileID)
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        function show(input) {
+            if (input.files && input.files[0]) {
+                var filerdr = new FileReader();
+                filerdr.onload = function (e) {
+                    $('#csr_img').attr('src', e.target.result);
+                }
+                filerdr.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+    <script src="~/ckeditor_4.8.0_full/ckeditor/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace("DescriptionEn");
+        CKEDITOR.replace("DescriptionAr");
+    </script>
+}

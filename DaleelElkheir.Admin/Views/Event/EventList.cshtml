@@ -1,0 +1,128 @@
+﻿@using DaleelElkheir.DAL.Domain
+@model IEnumerable<DaleelElkheir.DAL.Domain.Event>
+
+@{
+    ViewBag.Title = "EventList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Events</h2>
+<br/>
+<p>
+    @Html.ActionLink("Create New", "CreateEvent", null,new {@class="btn btn-primary"})
+</p>
+@if (Session["User"] != null && (Session["User"] as User).UserTypeID == 1)
+{
+    <div class="row form-group">
+        <div class="col-md-6">
+            @Html.DropDownList("OrgID", new SelectList(ViewBag.Organization, "Value", "Text"), null, new { @class = "form-control" })
+        </div>
+    </div>
+}
+<table class="table-striped table-hover table-condensed table-bordered table" id="EventTable">
+    <thead>
+        <tr>
+
+            <th>
+                @Html.DisplayName("Title En")
+            </th>
+            <th>
+                @Html.DisplayName("Title Ar")
+            </th>
+            <th>
+                @Html.DisplayName("Start Date")
+            </th>
+            <th>
+                @Html.DisplayName("End Date")
+            </th>
+            <th>
+                @Html.DisplayName("Organization")
+            </th>
+            <th>
+                @Html.DisplayName("Category")
+            </th>
+            <th>
+                @Html.DisplayName("Region")
+            </th>
+            <th>
+                @Html.DisplayName("Confirmation")
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+               
+                <td>
+                    @Html.DisplayFor(modelItem => item.TitleEn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TitleAr)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Organization.NameEn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category.NameEn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.City.NameEn) , @Html.DisplayFor(modelItem => item.City.Governorate.NameEn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CaseConfirmation.Name)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "UpdateEvent", new { eventID = item.ID }) |
+                    @Html.ActionLink("Delete", "DeleteEvent", new { eventID = item.ID })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section Scripts {
+
+<script type="text/javascript">
+
+
+        $(document).ready(function () {
+
+            var table = $('#EventTable').DataTable();
+
+            $("#OrgID").change(function () {
+
+                $.fn.dataTable.ext.search.push(
+          function (settings, data, dataIndex) {
+
+              var x = $("#OrgID").val();
+              if (x != "") {
+                  var Cat = data[4];
+
+                  if (Cat == x) {
+                      return true;
+                  }
+                  return false;
+              }
+              else {
+                  return true;
+              }
+          }
+              );
+
+                table.draw();
+
+            });
+
+
+        });
+
+
+</script>
+}

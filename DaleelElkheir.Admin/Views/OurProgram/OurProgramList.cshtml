@@ -1,0 +1,65 @@
+﻿@model IEnumerable<DaleelElkheir.DAL.Domain.OurProgram>
+
+@{
+    ViewBag.Title = "OurProgramList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>OurPrograms</h2>
+<br/>
+<p>
+    @Html.ActionLink("Create New", "CreateOurProgram", null,new {@class="btn btn-primary"})
+</p>
+<table class="table-striped table-hover table-condensed table-bordered table" id="OurProgramTable">
+    <thead>
+        <tr>
+
+            <th>
+                @Html.DisplayName("Title En")
+            </th>
+            <th>
+                @Html.DisplayName("Title Ar")
+            </th>
+            <th>
+                @Html.DisplayName("Description En")
+            </th>
+            <th>
+                @Html.DisplayName("Description Ar")
+            </th>
+          
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+               
+                <td>
+                    @Html.DisplayFor(modelItem => item.TitleEn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TitleAr)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DescriptionEn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DescriptionAr)
+                </td>
+               
+                <td>
+                    @Html.ActionLink("Edit", "UpdateOurProgram", new { ourProgramID = item.ID }) |
+                    @Html.ActionLink("Delete", "DeleteOurProgram", new { ourProgramID = item.ID })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section Scripts {
+    <script>
+$(document).ready(function() {
+    $('#OurProgramTable').DataTable();
+});
+    </script>
+}

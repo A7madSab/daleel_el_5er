@@ -1,0 +1,139 @@
+﻿@model IEnumerable<DaleelElkheir.Admin.Models.Organizations.OrganizationModelReturn>
+@{
+    ViewBag.Title = "OrganizationList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Organizations</h2>
+<br/>
+<p>
+    @Html.ActionLink("Create New", "CreateOrganization", null,new {@class="btn btn-primary"})
+</p>
+<div class="row form-group">
+    <div class="col-md-6">
+        @Html.DropDownList("OrganizationID", new SelectList(ViewBag.Organization, "Value", "Text"), null, new { @class = "form-control" })
+    </div>
+</div>
+<table class="table-striped table-hover table-condensed table-bordered table" id="OrganizationTable">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayName("Name AR")
+            </th>
+            <th>
+                @Html.DisplayName("Address En")
+            </th>
+            <th>
+                @Html.DisplayName("Address Ar")
+            </th>
+            <th>
+                @Html.DisplayName("Governorate")
+            </th>
+            <th>
+                @Html.DisplayName("Region")
+            </th>
+            <th>
+                @Html.DisplayName("Area")
+            </th>
+            <th>
+                @Html.DisplayName("Category")
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NameAr)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AddressEn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AddressAr)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Governorate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Region)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Area)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Categoy)
+            </td>
+            <td>
+                @if (item.Status == 1)
+                {
+                    @Html.ActionLink("Approve", "ApproveOrganization", new { organizationID = item.ID }) @:|
+                    @*@Html.ActionLink("Reject", "RejectOrganization", new { organizationID = item.ID }) @:|*@
+                }
+
+
+                @Html.ActionLink("Edit", "UpdateOrganization", new { organizationID = item.ID }) |
+                @*@Html.ActionLink("Delete", "DeleteOrganization", new { organizationID = item.ID })*@
+                <input type="button" id="del" name="delete" class="btn-link" style="padding:0px;" value="Delete" onclick="deleteRecord(@item.ID)" />
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+@section Scripts {
+<script type="text/javascript">
+
+
+        $(document).ready(function () {
+
+            var table = $('#OrganizationTable').DataTable();
+
+            $("#OrganizationID").change(function () {
+
+                $.fn.dataTable.ext.search.push(
+          function (settings, data, dataIndex) {
+
+              var x = $("#OrganizationID").val();
+              if (x != "") {
+                  var Cat = data[0];
+
+                  if (Cat == x) {
+                      return true;
+                  }
+                  return false;
+              }
+              else {
+                  return true;
+              }
+          }
+              );
+
+                table.draw();
+
+            });
+
+
+        });
+
+        function deleteRecord(ID)
+        {
+            debugger;
+            $.getJSON("@Url.Action("DeleteOrganization", "Organization")", { organizationID: ID }, function (data) {
+            if(data.result == false)
+            {
+                alert(data.message);
+            }
+            else
+            {
+                alert(data.message);
+                window.location.href = '@Url.Action("OrganizationList", "Organization")'
+            }
+
+        });
+        }
+
+
+</script>
+}

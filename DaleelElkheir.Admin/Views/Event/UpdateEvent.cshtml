@@ -1,0 +1,294 @@
+﻿@using DaleelElkheir.DAL.Domain
+@model DaleelElkheir.Admin.Models.Events.EventModel
+
+@{
+    ViewBag.Title = "UpdateEvent";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<link href="~/bootstrap-datetimepicker-0.0.11/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+
+@using (Html.BeginForm("UpdateEvent", "Event", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h5>Update Event</h5>
+        </div>
+        <div class="panel-body">
+
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+                <div class="row form-group  ">
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.TitleEn, "Title English", htmlAttributes: new { @class = "control-label col-md-4", @Style = "text-align: left !important;" })
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.TitleEn, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.TitleEn, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.TitleAr, "Title Arabic", htmlAttributes: new { @class = "control-label col-md-4", @Style = "text-align: left !important;" })
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.TitleAr, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.TitleAr, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group  ">
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.StartDate, "Start Date", htmlAttributes: new { @class = "control-label col-md-4", @Style = "text-align: left !important;" })
+                        <div class="col-md-8">
+                            <div id="StartDate" class="input-append">
+                                <input data-format="dd/MM/yyyy HH:mm:ss PP" name="StartDate" id="StartDate" type="datetime" value="@Model.StartDate" required />
+                                <span class="add-on">
+                                    <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+                                    </i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.EndDate, "End Date", htmlAttributes: new { @class = "control-label col-md-4", @Style = "text-align: left !important;" })
+                        <div class="col-md-8">
+                            <div id="EndDate" class="input-append">
+                                <input data-format="dd/MM/yyyy HH:mm:ss PP" name="EndDate" id="EndDate" type="datetime" value="@Model.EndDate" required />
+                                <span class="add-on">
+                                    <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+                                    </i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.AddressEn, "English Address", htmlAttributes: new { @class = "control-label col-md-4", @Style = "text-align: left !important;" })
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.AddressEn, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.AddressEn, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.AddressAr, "Arabic Address", htmlAttributes: new { @class = "control-label col-md-4", @Style = "text-align: left !important;" })
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.AddressAr, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.AddressAr, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.AddressEn, "English Address", htmlAttributes: new { @class = "control-label col-md-4", @Style = "text-align: left !important;" })
+                        <div class="col-md-8">
+                            @Html.DropDownList("GovernorateID", new SelectList(ViewBag.Governorate, "Value", "Text"), null, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.GovernorateID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.CityID, "Region", htmlAttributes: new { @class = "control-label col-md-4", @Style = "text-align: left !important;" })
+                        <div class="col-md-8">
+                            @Html.DropDownList("CityID", new SelectList(ViewBag.region, "Value", "Text"), null, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.CityID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group  ">
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.CategoryID, "Category", htmlAttributes: new { @class = "control-label col-md-4", @Style = "text-align: left !important;" })
+                        <div class="col-md-8">
+                            @Html.DropDownList("CategoryID", new SelectList(ViewBag.Category, "Value", "Text"), null, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.CategoryID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.OrganizationID, "Organization", htmlAttributes: new { @class = "control-label col-md-4", @Style = "text-align: left !important;" })
+                        <div class="col-md-8">
+                            @Html.DropDownList("OrganizationID", new SelectList(ViewBag.Organizations, "Value", "Text"), null, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.OrganizationID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.Mobile, "Mobile", htmlAttributes: new { @class = "control-label col-md-4", @Style = "text-align: left !important;" })
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.Mobile, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Mobile, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.OurProgramID, "Program", htmlAttributes: new { @class = "control-label col-md-4", @Style = "text-align: left !important;" })
+                        <div class="col-md-8">
+                            @Html.DropDownList("OurProgramID", new SelectList(ViewBag.OurPrograms, "Value", "Text"), null, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.OurProgramID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.ImageID, "Image", htmlAttributes: new { @class = "control-label col-md-4", @Style = "text-align: left !important;" })
+                        <div class="col-md-8">
+                            <div>  <img id="event_img" src="@(Model.FileData!=null?Model.FileData.Extenstion:null)" height="100" width="90" class="img-thumbnail" /> </div>
+                            <div> <input type="file" title="search image" id="file" name="file" onchange="show(this)" accept="image/*" /> </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+
+                    </div>
+                </div>
+                @{
+                    var currentUser = (Session["User"] as User);
+                    if (currentUser != null && currentUser.UserTypeID == 1)
+                    {
+                        <div class="row form-group">
+                            <div class="col-md-6">
+                                @Html.LabelFor(model => model.ConfirmationID, "Confirmation", htmlAttributes: new { @class = "control-label col-md-4", @Style = "text-align: left !important;" })
+                                <div class="col-md-8">
+                                    @Html.DropDownList("ConfirmationID", new SelectList(ViewBag.Confirmation, "Value", "Text"), null, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.ConfirmationID, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        @Html.HiddenFor(m => m.ConfirmationID);
+                    }
+                }
+                <div class="row">
+                    @Html.LabelFor(model => model.Link, "Link", htmlAttributes: new { @class = "control-label col-md-4", @Style = "text-align: left !important;" })
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-12">
+                        @Html.TextAreaFor(model => model.Link, 2, 40, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Link, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="row">
+                    @Html.LabelFor(model => model.DescriptionProgram, "Program Description", htmlAttributes: new { @class = "control-label col-md-4", @Style = "text-align: left !important;" })
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-12">
+                        @Html.TextAreaFor(model => model.DescriptionProgram, 2, 40, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.DescriptionProgram, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    @Html.LabelFor(model => model.HowToJoin, "Description English", htmlAttributes: new { @class = "control-label col-md-4", @Style = "text-align: left !important;" })
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-12">
+                        @Html.TextAreaFor(model => model.HowToJoin, 2, 40, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.HowToJoin, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="row">
+                    @Html.LabelFor(model => model.DescriptionEn, "Description English", htmlAttributes: new { @class = "control-label col-md-4", @Style = "text-align: left !important;" })
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-12">
+                        @Html.TextAreaFor(model => model.DescriptionEn, 2, 40, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.DescriptionEn, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="row">
+                    @Html.LabelFor(model => model.DescriptionAr, "Description Arabic", htmlAttributes: new { @class = "control-label col-md-4", @Style = "text-align: left !important;" })
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-12">
+                        @Html.TextAreaFor(model => model.DescriptionAr, 2, 40, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.DescriptionAr, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+                </div>
+            </div>
+    <div class="row">
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" name="save" value="Save" class="btn btn-primary btn-group-lg" style="min-width:100px;" />
+                @Html.ActionLink("Cancel", "EventList", null, htmlAttributes: new { @class = "btn btn-primary" })
+            </div>
+        </div>
+    </div>
+    @Html.HiddenFor(m=>m.ID)
+    @Html.HiddenFor(m => m.ImageID)
+    @Html.HiddenFor(m => m.UserID)
+}
+ 
+@section Scripts {
+@Scripts.Render("~/bundles/jqueryval")
+
+<script src="~/bootstrap-datetimepicker-0.0.11/js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript">
+
+        $(function () {
+            debugger;
+            $('#StartDate').datetimepicker({
+                language: 'en',
+                pick12HourFormat: true
+            });
+        });
+
+        $(function () {
+            debugger;
+            $('#EndDate').datetimepicker({
+                language: 'en',
+                pick12HourFormat: true
+            });
+        });
+
+        jQuery.validator.methods["date"] = function (value, element) { return true; }
+
+
+</script>
+<script src="~/ckeditor_4.8.0_full/ckeditor/ckeditor.js"></script>
+  <script>
+    CKEDITOR.replace("DescriptionEn");
+    CKEDITOR.replace("DescriptionAr");
+    CKEDITOR.replace("DescriptionProgram");
+    CKEDITOR.replace("HowToJoin");
+</script>
+<script>
+    function show(input) {
+        if (input.files && input.files[0]) {
+            var filerdr = new FileReader();
+            filerdr.onload = function (e) {
+                $('#event_img').attr('src', e.target.result);
+            }
+            filerdr.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
+<script type="text/javascript">
+    $(function () {
+        $("#GovernorateID").change(function () {
+            debugger;
+            var val = $(this).val();
+            var subItems="";
+            $.getJSON("@Url.Action("GetRegions","Case")", { GovernorateID: val }, function (data) {
+              $.each(data,function(index,item){
+                subItems+="<option value='"+item.Value+"'>"+item.Text+"</option>"
+              });
+              $("#CityID").html(subItems)
+            });
+        });
+    });
+</script>
+}

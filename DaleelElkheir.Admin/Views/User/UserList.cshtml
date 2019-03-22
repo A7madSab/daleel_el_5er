@@ -1,0 +1,131 @@
+﻿@using DaleelElkheir.DAL.Domain
+@model IEnumerable<DaleelElkheir.DAL.Domain.User>
+
+@{
+    ViewBag.Title = "UserList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2> Users </h2>
+<br/>
+<p>
+    @Html.ActionLink("Create New", "CreateUser", null,new {@class="btn btn-primary"})
+</p>
+@if (Session["User"] != null && (Session["User"] as User).UserTypeID == 1)
+{
+    <div class="row form-group">
+        <div class="col-md-6">
+            @Html.DropDownList("OrgID", new SelectList(ViewBag.Organization, "Value", "Text"), null, new { @class = "form-control" })
+        </div>
+    </div>
+}
+<table class="table-striped table-hover table-condensed table-bordered table" id="UserTable">
+    <thead>
+        <tr>
+
+            <th>
+                @Html.DisplayName("Name")
+            </th>
+            <th>
+                @Html.DisplayName("User Name")
+            </th>
+            <th>
+                @Html.DisplayName("Email")
+            </th>
+            <th>
+                @Html.DisplayName("UserType")
+            </th>
+            <th>
+                @Html.DisplayName("Mobile")
+            </th>
+            <th>
+                @Html.DisplayName("Organization")
+            </th>
+            
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+               
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserType.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Mobile)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Organization.NameEn)
+                </td>
+               
+                <td>
+                    @Html.ActionLink("Edit", "UpdateUser", new { UserID = item.ID }) |
+                    @Html.ActionLink("Delete", "DeleteUser", new { UserID = item.ID })
+                    @*<input type="submit" id="del" name="delete" value="delete" onclick="deleteRecord(@item.ID)"/>*@
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section Scripts {
+<script>
+
+    function deleteRecord(ID)
+    {
+        debugger;
+        $.getJSON("@Url.Action("DeleteUser", "User")", { UserID: ID }, function (data) {
+            if(data.result == true)
+            {
+                alert("Successful delete");
+            }
+            else
+            {
+                alert(data.message);
+            }
+           
+        });
+    }
+
+$(document).ready(function () {
+
+    var table = $('#UserTable').DataTable();
+
+    $("#OrgID").change(function () {
+
+        $.fn.dataTable.ext.search.push(
+            function (settings, data, dataIndex) {
+                var x = $("#OrgID").val();
+                if (x != "") {
+                    var Cat = data[5];
+                    if (Cat == x) {
+                        return true;
+                    }
+                    return false;
+                }
+                else {
+                    return true;
+                }
+            }
+        );
+
+        table.draw();
+
+    });
+
+
+});
+
+
+</script>
+}

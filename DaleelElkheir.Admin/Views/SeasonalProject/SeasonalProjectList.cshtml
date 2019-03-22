@@ -1,0 +1,71 @@
+﻿@model IEnumerable<DaleelElkheir.DAL.Domain.SeasonalProject>
+
+@{
+    ViewBag.Title = "SeasonalProjectList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Seasonal Project</h2>
+<br/>
+<p>
+    @Html.ActionLink("Create New", "CreateSeasonalProject", null,new {@class="btn btn-primary"})
+</p>
+<table class="table-striped table-hover table-condensed table-bordered table" id="SeasonalProjectTable">
+    <thead>
+        <tr>
+
+            <th>
+                @Html.DisplayName("Name En")
+            </th>
+            <th>
+                @Html.DisplayName("Name Ar")
+            </th>
+          
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+               
+                <td>
+                    @Html.DisplayFor(modelItem => item.NameEn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NameAr)
+                </td>
+               
+                <td>
+                    @Html.ActionLink("Edit", "UpdateSeasonalProject", new { SeasonalProjectID = item.ID }) |
+                    <input type="button" id="del" name="delete" class="btn-link" style="padding:0px;" value="Delete" onclick="deleteRecord(@item.ID)" />|
+                    @Html.ActionLink("View Activities", "SeasonalProjectActivity", new { SeasonalProjectID = item.ID })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section Scripts {
+<script>
+$(document).ready(function() {
+    $('#SeasonalProjectTable').DataTable();
+});
+
+function deleteRecord(ID)
+{
+    debugger;
+    $.getJSON("@Url.Action("DeleteSeasonalProject", "SeasonalProject")", { SeasonalProjectID: ID }, function (data) {
+    if(data.result == false)
+    {
+        alert(data.message);
+    }
+    else
+    {
+        alert(data.message);
+        window.location.href = '@Url.Action("SeasonalProjectList", "SeasonalProject")'
+    }
+
+});
+}
+</script>
+}

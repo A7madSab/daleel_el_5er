@@ -1,0 +1,76 @@
+﻿@model IEnumerable<DaleelElkheir.DAL.Domain.CompanySocialResponsibility>
+
+@{
+    ViewBag.Title = "CSRList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Company Social Responsibility</h2>
+<br/>
+<p>
+    @Html.ActionLink("Create New", "CreateCSR", null,new {@class="btn btn-primary"})
+</p>
+<table class="table-striped table-hover table-condensed table-bordered table" id="CSRTable">
+    <thead>
+        <tr>
+
+            <th>
+                @Html.DisplayName("Name En")
+            </th>
+            <th>
+                @Html.DisplayName("Name Ar")
+            </th>
+            <th>
+                @Html.DisplayName("Category")
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.NameEn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NameAr)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category)
+            </td>
+
+            <td>
+                @Html.ActionLink("Edit", "UpdateCSR", new { CSRID = item.ID }) |
+                @*@Html.ActionLink("Delete", "DeleteCSR", new { CSRID = item.ID })*@
+                <input type="button" id="del" name="delete" class="btn-link" style="padding:0px;" value="Delete" onclick="deleteRecord(@item.ID)" />
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+@section Scripts {
+    <script>
+$(document).ready(function() {
+    $('#CSRTable').DataTable();
+});
+
+function deleteRecord(ID)
+{
+    debugger;
+    $.getJSON("@Url.Action("DeleteCSR", "CSRCompany")", { CSRID : ID }, function (data) {
+    if(data.result == false)
+    {
+        alert(data.message);
+    }
+    else
+    {
+        alert(data.message);
+        window.location.href = '@Url.Action("CSRList", "CSRCompany")'
+    }
+
+});
+}
+    </script>
+}

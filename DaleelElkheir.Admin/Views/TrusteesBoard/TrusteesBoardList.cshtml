@@ -1,0 +1,63 @@
+﻿@model IEnumerable<DaleelElkheir.DAL.Domain.TrusteesBoard>
+
+@{
+    ViewBag.Title = "TrusteesBoardList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Trustees Boards</h2>
+<br/>
+<p>
+    @Html.ActionLink("Create New", "CreateTrusteesBoard", null,new {@class="btn btn-primary"})
+</p>
+<table class="table-striped table-hover table-condensed table-bordered table" id="TrusteesBoardTable">
+    <thead>
+        <tr>
+
+            <th>
+                @Html.DisplayName("Name En")
+            </th>
+            <th>
+                @Html.DisplayName("Name Ar")
+            </th>
+            <th>
+                @Html.DisplayName("Title En")
+            </th>
+            <th>
+                @Html.DisplayName("Title Ar")
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+               
+                <td>
+                    @Html.DisplayFor(modelItem => item.NameEn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NameAr)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TitleEn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TitleAr)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "UpdateTrusteesBoard", new { BoardID = item.ID }) |
+                    @Html.ActionLink("Delete", "DeleteTrusteesBoard", new { BoardID = item.ID })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section Scripts {
+    <script>
+$(document).ready(function() {
+    $('#TrusteesBoardTable').DataTable();
+});
+    </script>
+}

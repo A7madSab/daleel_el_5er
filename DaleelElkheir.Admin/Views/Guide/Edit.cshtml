@@ -1,0 +1,89 @@
+﻿@model DaleelElkheir.Admin.Models.Guide.GuideModel
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm("Edit", "Guide", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>GuideModel</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ID)
+
+        <div class="row form-group">
+            <div class="col-md-6">
+                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="col-md-6">
+                @Html.LabelFor(model => model.Ext, "Image", htmlAttributes: new { @class = "control-label col-md-4", @Style = "text-align: left !important;" })
+                <div class="col-md-8">
+                    <div> <img id="Event_img" src="@(Model.Ext)" height="100" width="90" class="img-thumbnail" /> </div>
+                    <div> <input type="file" title="search image" id="file" name="file" onchange="show(this)" accept="/*" /> </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row form-group">
+            <div class="col-md-6">
+                @Html.LabelFor(model => model.KeyWords, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.TextAreaFor(model => model.KeyWords, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.KeyWords, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-6"> </div>
+        </div>
+
+        <div class="row form-group">
+            @Html.LabelFor(model => model.Description, "English Description", htmlAttributes: new { @class = "control-label col-md-2", @Style = "text-align: left !important;" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+    @Html.HiddenFor(m => m.ID)
+    @Html.HiddenFor(m => m.Ext)
+    @Html.HiddenFor(m => m.FileName)
+
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script src="~/ckeditor_4.8.0_full/ckeditor/ckeditor.js"></script>
+    <script>
+        CKEDITOR.env.isCompatible = true;
+        CKEDITOR.replace("Description");
+    </script>
+    <script>
+        function show(input) {
+            if (input.files && input.files[0]) {
+                var filerdr = new FileReader();
+                filerdr.onload = function (e) {
+                    $('#Event_img').attr('src', e.target.result);
+                }
+                filerdr.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+}

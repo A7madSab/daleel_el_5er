@@ -1,0 +1,134 @@
+﻿@model DaleelElkheir.Admin.Models.Hospitals.HospitalModel
+
+@{
+    ViewBag.Title = "CreateHospital";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+@using (Html.BeginForm("CreateHospital", "Hospital", FormMethod.Post))
+{
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h5>Create Hospital</h5>
+        </div>
+        <div class="panel-body">
+
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="row form-group  ">
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.NameEn, "Name English", htmlAttributes: new { @class = "control-label col-md-4", @Style = "text-align: left !important;" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.NameEn, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.NameEn, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.NameAr, "Name Arabic", htmlAttributes: new { @class = "control-label col-md-4", @Style = "text-align: left !important;" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.NameAr, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.NameAr, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="row form-group  ">
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.TitleEn, "Title English", htmlAttributes: new { @class = "control-label col-md-4", @Style = "text-align: left !important;" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.TitleEn, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.TitleEn, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.TitleAr, "Title Arabic", htmlAttributes: new { @class = "control-label col-md-4", @Style = "text-align: left !important;" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.TitleAr, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.TitleAr, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+              </div>
+                <div class="row form-group">
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.CityID, "Governorate", htmlAttributes: new { @class = "control-label col-md-4", @Style = "text-align: left !important;" })
+                        <div class="col-md-8">
+                            @Html.DropDownList("GovernorateID", new SelectList(ViewBag.Governorate, "Value", "Text"), null, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.CityID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.CityID, "Region", htmlAttributes: new { @class = "control-label col-md-4", @Style = "text-align: left !important;" })
+                        <div class="col-md-8">
+                            @Html.DropDownList("CityID", new SelectList(ViewBag.region, "Value", "Text"), null, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.CityID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div> 
+  
+                
+                <div class="row">
+                    @Html.LabelFor(model => model.DescriptionEn, "Description English", htmlAttributes: new { @class = "control-label col-md-4", @Style = "text-align: left !important;" })
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-12">
+                        @Html.TextAreaFor(model => model.DescriptionEn, 2, 40, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.DescriptionEn, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="row">
+                    @Html.LabelFor(model => model.DescriptionAr, "Description Arabic", htmlAttributes: new { @class = "control-label col-md-4", @Style = "text-align: left !important;" })
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-12">
+                        @Html.TextAreaFor(model => model.DescriptionAr, 2, 40, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.DescriptionAr, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                       
+                    </div>
+                </div>
+            </div>
+    <div class="row">
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" name="save" value="Save" class="btn  btn-primary btn-group-lg" style="min-width:100px;" />
+                @Html.ActionLink("Cancel", "HospitalList", null, htmlAttributes: new { @class = "btn btn-primary" })
+            </div>
+        </div>
+    </div>
+}
+ 
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/ckeditor_4.8.0_full/ckeditor/ckeditor.js"></script>
+<script>
+    CKEDITOR.env.isCompatible = true;
+    CKEDITOR.replace("DescriptionEn");
+    CKEDITOR.replace("DescriptionAr");
+</script>
+
+<script type="text/javascript">
+
+
+    $(function () {
+        $("#GovernorateID").change(function () {
+            debugger;
+            var val = $(this).val();
+            var subItems="";
+            $.getJSON("@Url.Action("GetRegions","Hospital")", { GovernorateID: val }, function (data) {
+              $.each(data,function(index,item){
+                subItems+="<option value='"+item.Value+"'>"+item.Text+"</option>"
+              });
+              $("#CityID").html(subItems)
+            });
+        });
+    });
+</script> 
+}

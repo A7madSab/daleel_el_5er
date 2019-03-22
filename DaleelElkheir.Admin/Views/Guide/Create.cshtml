@@ -1,0 +1,77 @@
+﻿@model DaleelElkheir.Admin.Models.Guide.GuideModel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm("Create", "Guide", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Guide</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+        <div class="row form-group  ">
+            <div class="col-md-6">
+                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-6">
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                @Html.LabelFor(model => model.FileName, "File", htmlAttributes: new { @class = "control-label col-md-4", @Style = "text-align: left !important;" })
+                <div class="col-md-6">
+                    <div>  <img id="info_img" height="100" width="90" /> </div>
+                    <div> <input type="file" title="search File" id="file" name="file" onchange="show(this)" accept="/*" /> </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                @Html.LabelFor(model => model.KeyWords, "KeyWords ", htmlAttributes: new { @class = "control-label col-md-4", @Style = "text-align: left !important;" })
+
+                @Html.TextAreaFor(model => model.KeyWords, 5, 300, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.KeyWords, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row">
+            @Html.LabelFor(model => model.Description, "Program Description", htmlAttributes: new { @class = "control-label col-md-4", @Style = "text-align: left !important;" })
+        </div>
+        <div class="row form-group">
+            <div class="col-md-12">
+                @Html.TextAreaFor(model => model.Description, 2, 40, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script src="~/ckeditor_4.8.0_full/ckeditor/ckeditor.js"></script>
+<script>
+    CKEDITOR.env.isCompatible = true;
+    CKEDITOR.replace("Description");
+</script>

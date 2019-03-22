@@ -1,0 +1,52 @@
+﻿@model IEnumerable<DaleelElkheir.DAL.Domain.Sponsor>
+
+@{
+    ViewBag.Title = "SponsorList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Sponsors</h2>
+<br/>
+<p>
+    @Html.ActionLink("Create New", "CreateSponsor", null,new {@class="btn btn-primary"})
+</p>
+<table class="table-striped table-hover table-condensed table-bordered table" id="SponsorTable">
+    <thead>
+        <tr>
+
+            <th>
+                @Html.DisplayName("Name En")
+            </th>
+            <th>
+                @Html.DisplayName("Name Ar")
+            </th>
+          
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+               
+                <td>
+                    @Html.DisplayFor(modelItem => item.NameEn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NameAr)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "UpdateSponsor", new { sponsorID = item.ID }) |
+                    @Html.ActionLink("Delete", "DeleteSponsor", new { sponsorID = item.ID })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section Scripts {
+    <script>
+$(document).ready(function() {
+    $('#SponsorTable').DataTable();
+});
+    </script>
+}

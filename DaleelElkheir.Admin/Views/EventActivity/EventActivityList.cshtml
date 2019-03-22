@@ -1,0 +1,65 @@
+﻿@model IEnumerable<DaleelElkheir.DAL.Domain.EventForActivity>
+
+@{
+    ViewBag.Title = "EventActivityList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Events</h2>
+<br/>
+<p>
+    @Html.ActionLink("Create New", "CreateEventActivity", null,new {@class="btn btn-primary"})
+</p>
+<table class="table-striped table-hover table-condensed table-bordered table" id="EventActivityTable">
+    <thead>
+        <tr>
+
+            <th>
+                @Html.DisplayName("Title En")
+            </th>
+            <th>
+                @Html.DisplayName("Title Ar")
+            </th>
+            <th>
+                @Html.DisplayName("Start Date")
+            </th>
+            <th>
+                @Html.DisplayName("End Date")
+            </th>
+          
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+               
+                <td>
+                    @Html.DisplayFor(modelItem => item.TitleEn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TitleAr)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndDate)
+                </td>
+               
+                <td>
+                    @Html.ActionLink("Edit", "UpdateEventActivity", new { eventID = item.ID }) |
+                    @Html.ActionLink("Delete", "DeleteEventActivity", new { eventID = item.ID })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section Scripts {
+    <script>
+$(document).ready(function() {
+    $('#EventActivityTable').DataTable();
+});
+    </script>
+}

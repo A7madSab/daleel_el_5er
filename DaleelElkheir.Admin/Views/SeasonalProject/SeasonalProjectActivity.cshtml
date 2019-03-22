@@ -1,0 +1,100 @@
+﻿@model IEnumerable<DaleelElkheir.DAL.Domain.Activity>
+
+@{
+    ViewBag.Title = "SeasonalProjectActivityList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Seasonal Project Activities</h2>
+<br/>
+<p>
+    @Html.ActionLink("Create New", "CreateSeasonalProjectActivity", "SeasonalProjectActivity",new { projectID=@ViewBag.ProjectID }, new { @class = "btn btn-primary" })
+</p>
+<table class="table-striped table-hover table-condensed table-bordered table" id="SeasonalProjectActivityTable">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayName("Seasonal Project")
+            </th>
+            <th>
+                @Html.DisplayName("Organization")
+            </th>
+            <th>
+                @Html.DisplayName("Target")
+            </th>
+            <th>
+                @Html.DisplayName("Price")
+            </th>
+            <th>
+                @Html.DisplayName("Region")
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SeasonalProject.NameEn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Organization.NameEn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Target)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Region)
+                </td>
+                <td>
+                    @if (item.Approval == 0)
+                    {
+                        @Html.ActionLink("Accept", "AcceptActivity", new { ActivityID = item.ID })<span> | </span>
+                        @Html.ActionLink("Reject", "RejectActivity", new { ActivityID = item.ID })
+                    }
+                    @if (item.Approval == 2)
+                    {
+                       @Html.ActionLink("Accept", "AcceptActivity", new { ActivityID = item.ID })
+                    }
+                    else if (ViewBag.CurrentUserOrgID != item.OrganizationID && item.Approval == 1)
+                    {
+                      @Html.ActionLink("Reject", "RejectActivity", new { ActivityID = item.ID })
+                    }
+                    @if (ViewBag.CurrentUserOrgID == item.OrganizationID)
+                    {
+                        @Html.ActionLink("Edit", "UpdateSeasonalProjectActivity", "SeasonalProjectActivity", new { SeasonalProjectActivityID = item.ID }, null)
+                        @*<span> | </span>@Html.ActionLink("Delete", "DeleteSeasonalProjectActivity", "SeasonalProjectActivity",new { SeasonalProjectActivityID = item.ID }, null)*@
+                        <span> | </span><input type="button" id="del" name="delete" class="btn-link" style="padding:0px;" value="Delete" onclick="deleteRecord(@item.ID,@item.SeasonalProjectID)" />
+                    }
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section Scripts {
+<script>
+$(document).ready(function() {
+    $('#SeasonalProjectActivityTable').DataTable();
+        });
+        function deleteRecord(ID,projectID){
+    debugger;
+    $.getJSON("@Url.Action("DeleteSeasonalProjectActivity", "SeasonalProjectActivity")", { SeasonalProjectActivityID: ID }, function (data) {
+    if(data.result == false)
+    {
+        alert(data.message);
+    }
+    else
+    {
+        alert(data.message);
+        window.location.href = '@Url.Action("SeasonalProjectActivity", "SeasonalProject")?SeasonalProjectID=' + projectID;
+    }
+
+});
+}
+</script>
+}

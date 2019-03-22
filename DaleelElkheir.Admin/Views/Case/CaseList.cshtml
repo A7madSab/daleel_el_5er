@@ -1,0 +1,136 @@
+﻿@using DaleelElkheir.DAL.Domain
+@model IEnumerable<DaleelElkheir.DAL.Domain.HelpCase>
+
+@{
+    ViewBag.Title = "CaseList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Cases</h2>
+<br/>
+<p>
+    @Html.ActionLink("Create New", "CreateCase", null,new {@class="btn btn-primary"})
+</p>
+@if (Session["User"] != null&& (Session["User"] as User).UserTypeID==1)
+{
+<div class="row form-group">
+    <div class="col-md-6">
+        @Html.DropDownList("OrganizationID", new SelectList(ViewBag.Organization, "Value", "Text"), null, new { @class = "form-control" })
+    </div>
+</div>
+}
+<table class="table-striped table-hover table-condensed table-bordered table" id="CaseTable">
+    <thead>
+        <tr>
+
+            <th>
+                @Html.DisplayName("Name EN")
+            </th>
+            <th>
+                @Html.DisplayName("Name AR")
+            </th>
+            <th>
+                @Html.DisplayName("Case Code")
+            </th>
+            <th>
+                @Html.DisplayName("Organization")
+            </th>
+            <th>
+                @Html.DisplayName("Category")
+            </th>
+            <th>
+                @Html.DisplayName("Due Date")
+            </th>
+            <th>
+                @Html.DisplayName("Region")
+            </th>
+            <th>
+                @Html.DisplayName("ContactNumber")
+            </th>
+            <th>
+                @Html.DisplayName("Confirmation")
+            </th>
+            <th>
+                @Html.DisplayName("DescriptionProgram")
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NameEn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NameAr)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CaseCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Organization.NameEn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.NameEn)
+            </td>
+            <td>
+                @Html.DisplayName(item.DueDate.Value != null ? item.DueDate.Value.ToShortDateString() : null)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.City.NameEn) , @Html.DisplayFor(modelItem => item.City.Governorate.NameEn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContactNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CaseConfirmation.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DescriptionProgram)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "UpdateCase", new { caseID = item.ID }) |
+                @Html.ActionLink("Delete", "DeleteCase", new { caseID = item.ID })
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+@section Scripts {
+
+<script type="text/javascript">
+
+
+        $(document).ready(function () {
+            
+            var table = $('#CaseTable').DataTable();
+
+            $("#OrganizationID").change(function () {
+
+                $.fn.dataTable.ext.search.push(
+                  function (settings, data, dataIndex) {
+             
+                      var x = $("#OrganizationID").val();
+                      if (x != "") {
+                          var Cat = data[3];
+                          //debugger;
+                          if (Cat == x) {
+                              return true;
+                          }
+                          return false;
+                      }
+                      else {
+                          return true;
+                      }
+                  });
+                table.draw();
+            });
+
+
+        });
+
+
+</script>
+}

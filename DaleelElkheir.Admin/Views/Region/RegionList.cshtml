@@ -1,0 +1,76 @@
+﻿@model IEnumerable<DaleelElkheir.DAL.Domain.City>
+
+@{
+    ViewBag.Title = "RegionList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Regions</h2>
+<br/>
+<p>
+    @Html.ActionLink("Create New", "CreateRegion", null,new {@class="btn btn-primary"})
+</p>
+<table class="table-striped table-hover table-condensed table-bordered table" id="RegionTable">
+    <thead>
+        <tr>
+
+            <th>
+                @Html.DisplayName("Name En")
+            </th>
+            <th>
+                @Html.DisplayName("Name Ar")
+            </th>
+            <th>
+                @Html.DisplayName("Governorate")
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+               
+                <td>
+                    @Html.DisplayFor(modelItem => item.NameEn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NameAr)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Governorate.NameEn)
+                </td>
+                <td>
+                    @Html.ActionLink("Areas", "AreaList", new { regionID = item.ID }) |
+                    @Html.ActionLink("Edit", "UpdateRegion", new { regionID = item.ID }) |
+                    @*@Html.ActionLink("Delete", "DeleteRegion", new { regionID = item.ID })*@
+                    <input type="button" id="del" name="delete" class="btn-link" style="padding:0px;" value="Delete" onclick="deleteRecord(@item.ID)" />
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section Scripts {
+    <script>
+$(document).ready(function() {
+    $('#RegionTable').DataTable();
+});
+
+function deleteRecord(ID)
+{
+    debugger;
+    $.getJSON("@Url.Action("DeleteRegion", "Region")", { regionID: ID }, function (data) {
+    if(data.result == false)
+    {
+        alert(data.message);
+    }
+    else
+    {
+        alert(data.message);
+        window.location.href = '@Url.Action("RegionList", "Region")'
+    }
+
+});
+}
+</script>
+}

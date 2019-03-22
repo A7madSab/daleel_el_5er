@@ -1,0 +1,71 @@
+﻿@model IEnumerable<DaleelElkheir.DAL.Domain.Information>
+
+@{
+    ViewBag.Title = "InformationList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>News</h2>
+<br/>
+<p>
+    @Html.ActionLink("Create New", "CreateInformation", null,new {@class="btn btn-primary"})
+</p>
+<table class="table-striped table-hover table-condensed table-bordered table" id="InformationTable">
+    <thead>
+        <tr>
+
+            <th>
+                @Html.DisplayName("Title En")
+            </th>
+            <th>
+                @Html.DisplayName("Title Ar")
+            </th>
+            <th>
+                @Html.DisplayName("Date")
+            </th>
+            <th>
+                @Html.DisplayName("Description En")
+            </th>
+            <th>
+                @Html.DisplayName("Description Ar")
+            </th>
+          
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+               
+                <td>
+                    @Html.DisplayFor(modelItem => item.TitleEn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TitleAr)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NewsDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DescriptionEn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DescriptionAr)
+                </td>
+               
+                <td>
+                    @Html.ActionLink("Edit", "UpdateInformation", new { informationID = item.ID }) |
+                    @Html.ActionLink("Delete", "DeleteInformation", new { informationID = item.ID })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section Scripts {
+    <script>
+$(document).ready(function() {
+    $('#InformationTable').DataTable();
+});
+    </script>
+}

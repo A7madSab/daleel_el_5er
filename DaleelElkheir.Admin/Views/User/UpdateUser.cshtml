@@ -1,0 +1,140 @@
+﻿@model DaleelElkheir.Admin.Models.Users.UserModel
+
+@{
+    ViewBag.Title = "UpdateUser";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    string imageSrc = "";
+    if (Model.FileBinary != null)
+    {
+        string imageBase64 = Convert.ToBase64String(Model.FileBinary);
+        imageSrc = string.Format("data:image/gif;base64,{0}", imageBase64);
+    }
+}
+
+
+@using (Html.BeginForm("UpdateUser", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h5>Update User</h5>
+        </div>
+        <div class="panel-body">
+
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+   
+  
+                <div class="row form-group  ">
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.Name, "Name", htmlAttributes: new { @class = "control-label col-md-4", @Style = "text-align: left !important;" })
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.Email, "Email", htmlAttributes: new { @class = "control-label col-md-4", @Style = "text-align: left !important;" })
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </div>
+
+                    </div>
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.Password, "Password", htmlAttributes: new { @class = "control-label col-md-4", @Style = "text-align: left !important;" })
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div> 
+                <div class="row form-group">
+                    <div class="col-md-6">
+
+                        @Html.LabelFor(model => model.UserName, "User Name", htmlAttributes: new { @class = "control-label col-md-4", @Style = "text-align: left !important;" })
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.UserTypeID, "User Type", htmlAttributes: new { @class = "control-label col-md-4", @Style = "text-align: left !important;" })
+                        <div class="col-md-8">
+                            @Html.DropDownList("UserTypeID", new SelectList(ViewBag.UserType, "Value", "Text"), null, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.UserTypeID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.Mobile, "Mobile", htmlAttributes: new { @class = "control-label col-md-4", @Style = "text-align: left !important;" })
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.Mobile, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Mobile, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.OrganizationID, "Organization", htmlAttributes: new { @class = "control-label col-md-4", @Style = "text-align: left !important;" })
+                        <div class="col-md-8">
+                            @Html.DropDownList("OrganizationID", new SelectList(ViewBag.Organization, "Value", "Text"), null, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.OrganizationID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+               </div>
+                </div>
+            </div>
+    <div class="row">
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" name="save" value="Save" class="btn btn-primary btn-group-lg" style="min-width:100px;" />
+                @Html.ActionLink("Cancel", "UserList", null, htmlAttributes: new { @class = "btn btn-primary" })
+            </div>
+        </div>
+    </div>
+    @Html.HiddenFor(m=>m.ID)
+    @Html.HiddenFor(m => m.ImageID)
+    @Html.HiddenFor(m => m.UserTypeID)
+
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+<script type="text/javascript">
+    $(function () {
+        $("#UserTypeID").change(function () {
+
+            var val = $(this).val();
+            if (val == 2)
+            {
+                var subItems = "";
+                $.getJSON("@Url.Action("GetOrganizations", "User")", {}, function (data) {
+                    $.each(data, function (index, item) {
+                        subItems += "<option value='" + item.Value + "'>" + item.Text + "</option>"
+                    });
+                    $("#OrganizationID").html(subItems)
+                });
+            }
+            else
+            {
+                $("#OrganizationID").html("");
+            }
+        });
+    });
+    $(document).ready(function () {
+        $("#UserTypeID").trigger('change');
+    });
+</script>
+
+}

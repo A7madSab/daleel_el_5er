@@ -1,0 +1,57 @@
+﻿@model IEnumerable<DaleelElkheir.DAL.Domain.HospitalContact>
+
+@{
+    ViewBag.Title = "HospitalContactList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Hospital Contact</h2>
+<br/>
+<p>
+    @Html.ActionLink("Create New", "CreateHospitalContact", null,new {@class="btn btn-primary"})
+</p>
+<table class="table-striped table-hover table-condensed table-bordered table" id="HospitalContactTable">
+    <thead>
+        <tr>
+
+            <th>
+                @Html.DisplayName("Contact Name")
+            </th>
+            <th>
+                @Html.DisplayName("Contact Number")
+            </th> 
+            <th>
+                @Html.DisplayName("Hospital")
+            </th>          
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+               
+                <td>
+                    @Html.DisplayFor(modelItem => item.ContactName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ContactNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Hospital.NameEn)
+                </td>         
+                <td>
+                    @Html.ActionLink("Edit", "UpdateHospitalContact", new { HospitalContactID = item.ID }) |
+                    @Html.ActionLink("Delete", "DeleteHospitalContact", new { HospitalContactID = item.ID })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section Scripts {
+    <script>
+$(document).ready(function() {
+    $('#HospitalContactTable').DataTable();
+});
+    </script>
+}

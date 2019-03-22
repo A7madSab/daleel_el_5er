@@ -1,0 +1,38 @@
+﻿@model IEnumerable<DaleelElkheir.Admin.Models.Regions.AreaSimpleModel>
+
+@{
+    ViewBag.Title = "AreaList";
+}
+
+<h2>@ViewBag.RegionName Areas</h2>
+
+<p>
+    @Html.ActionLink("Create New", "CreateArea",new { regionID = ViewBag.RegionID })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NameEn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NameAr)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NameEn)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NameAr)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "EditArea", new { areaID = item.ID }) |
+            @Html.ActionLink("Delete", "DeleteArea", new { areaID = item.ID })
+        </td>
+    </tr>
+}
+
+</table>

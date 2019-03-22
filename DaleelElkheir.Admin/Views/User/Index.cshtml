@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h2>Daleel Elkheir Admin</h2>
+    
+    <br />
+   
+    @{if(Session["User"]==null)
+        {
+       <p>@Html.ActionLink("Log in", "Login", "User", new { @class = "btn btn-primary btn-lg" })</p>
+        }
+        else
+        {
+       <p>@Html.ActionLink("Log off", "LogOff", "User", new { @class = "btn btn-primary btn-lg" })</p>
+        }
+     }
+</div>
+
+<div class="row">
+   
+</div>
+
+@section scripts {
+
+
+    @*<script src="~/Scripts/jquery.signalR-2.2.2.min.js"></script>
+    <script src="~/signalr/hubs"></script>*@
+
+
+    @*<script>
+
+        $(function () {
+
+                 var chat = $.connection.letsChatHub;
+
+                $.connection.hub.start().done(function () {
+                    chat.server.connect(@ViewBag.connectedUser);
+                   // chat.server.connect("4");
+                });
+            });
+
+
+    </script>*@
+ 
+}
+

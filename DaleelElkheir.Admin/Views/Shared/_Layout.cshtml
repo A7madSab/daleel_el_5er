@@ -1,0 +1,116 @@
+﻿@using DaleelElkheir.DAL.Domain
+@using DaleelElkheir.DAL.Domain
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("DaleelElkheir", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    @{ if (Session["User"] != null)
+                        {
+                            var currentUser = (Session["User"] as User);
+                            if (currentUser != null && currentUser.UserTypeID == 1)
+                            {
+
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" herf="#">Basic Data<span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li>@Html.ActionLink("OurPrograms", "OurProgramList", "OurProgram")</li>
+                                        <li>@Html.ActionLink("News", "InformationList", "Information")</li>
+                                        <li>@Html.ActionLink("CSR Companies", "CSRList", "CSRCompany")</li>
+                                        <li>@Html.ActionLink("CSR Activities", "CSRActivityList", "CSRActivity")</li>
+                                        <li>@Html.ActionLink("Governorates", "GovernorateList", "Governorate")</li>
+                                        <li>@Html.ActionLink("Regions", "RegionList", "Region")</li>
+                                        <li>@Html.ActionLink("About", "UpdateAbout", "About")</li>
+                                        <li>@Html.ActionLink("Sponsors", "SponsorList", "Sponsor")</li>
+                                        <li>@Html.ActionLink("Seasonal Projects", "SeasonalProjectList", "SeasonalProject")</li>
+                                        <li>@Html.ActionLink("Our Stories", "Edit", "OurStories")</li>
+                                        <li>@Html.ActionLink("Job Offers", "Index", "JobOffers")</li>
+
+                                        @*<li>@Html.ActionLink("Seasonal Project Activity Events", "EventActivityList", "EventActivity")</li>*@
+                                        <li>@Html.ActionLink("Trustees Board", "TrusteesBoardList", "TrusteesBoard")</li>
+                                        <li>@Html.ActionLink("Event Gallery", "EventGalleryList", "EventGallery")</li>
+                                        <li>@Html.ActionLink("Volunteers", "List", "Volunteer")</li>
+                                    </ul>
+                                </li>
+                                <li>@Html.ActionLink("Users", "UserList", "User")</li>
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" herf="#">Blood Bank<span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li>@Html.ActionLink("Blood Banks", "BloodBankList", "BloodBank")</li>
+                                        <li>@Html.ActionLink("Blood Bank Contacts", "BloodBankContactList", "BloodBankContact")</li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" herf="#">Hospitals<span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li>@Html.ActionLink("Hospitals", "HospitalList", "Hospital")</li>
+                                        <li>@Html.ActionLink("Hospital Contacts", "HospitalContactList", "HospitalContact")</li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" herf="#">Guide<span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li>@Html.ActionLink("Guide", "index", "Guide")</li>
+                                        <li>@Html.ActionLink("Sellers", "index", "Sellers")</li>
+                                        <li>@Html.ActionLink("Product Category", "index", "ProductCategories")</li>
+                                        <li>@Html.ActionLink("Product", "index", "Product")</li>
+                                    </ul>
+                                </li>
+
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" herf="#">Cases<span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li>@Html.ActionLink("Cases", "CaseList", "Case")</li>
+                                        <li>@Html.ActionLink("Categories", "CategoryList", "Category")</li>
+                                        <li>@Html.ActionLink("Organization", "OrganizationList", "Organization")</li>
+                                    </ul>
+                                </li>
+                                <li>@Html.ActionLink("Events", "EventList", "Event")</li>
+                                <li>@Html.ActionLink("Chat Room", "ChatThreadMessageRoom", "ChatThread")</li>
+                            }
+                            else if (currentUser != null && currentUser.UserTypeID == 2)
+                            {
+                                <li>@Html.ActionLink("Cases", "CaseList", "Case")</li>
+                                <li>@Html.ActionLink("Events", "EventList", "Event")</li>
+                                <li>@Html.ActionLink("Seasonal Project Activities", "SeasonalProjectActivityList", "SeasonalProjectActivity")</li>
+                            }
+                        }
+                    }
+                </ul>
+
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer style="position: fixed; bottom: 0;" class="col-md-offset-4">
+            <p>&copy; @DateTime.Now.Year - Yakeen Solution</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+

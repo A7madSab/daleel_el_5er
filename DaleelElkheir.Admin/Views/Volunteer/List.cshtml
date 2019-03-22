@@ -1,0 +1,85 @@
+﻿@model IEnumerable<DaleelElkheir.Admin.Models.Volunteers.VolunteerListModel>
+
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>Volunteers</h2>
+
+<table class="table-striped table-hover table-condensed table-bordered table" id="VolunteerTable">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Contact)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Job)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nationality)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DaysAvailable)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AboutQuestion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VolunteeringMethod)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Categories)
+            </th>
+           
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Contact)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Job)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nationality)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DaysAvailable)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AboutQuestion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VolunteeringMethod)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Categories)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#VolunteerTable').DataTable();
+        });
+
+
+    </script>
+}
